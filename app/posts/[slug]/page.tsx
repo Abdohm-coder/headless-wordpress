@@ -1,6 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "@/lib/api";
-import Layout from "@/components/layout";
 import Container from "@/components/container";
 import Header from "@/components/header";
 import { CMS_NAME } from "@/lib/constants";
@@ -21,27 +20,25 @@ export default async function page({ params }: Props) {
   const morePosts = posts?.edges;
 
   return (
-    <Layout>
-      <Container>
-        <Header />
-        <article>
-          <PostHeader
-            title={post.title}
-            coverImage={post.featuredImage}
-            date={post.date}
-            author={post.author}
-            categories={post.categories}
-          />
-          <PostBody content={post.content} />
-          <footer>
-            {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
-          </footer>
-        </article>
+    <Container>
+      <Header />
+      <article>
+        <PostHeader
+          title={post.title}
+          coverImage={post.featuredImage}
+          date={post.date}
+          author={post.author}
+          categories={post.categories}
+        />
+        <PostBody content={post.content} />
+        <footer>
+          {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
+        </footer>
+      </article>
 
-        <SectionSeparator />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-      </Container>
-    </Layout>
+      <SectionSeparator />
+      {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+    </Container>
   );
 }
 

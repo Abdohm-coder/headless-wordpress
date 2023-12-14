@@ -64,6 +64,29 @@ export async function getAllPostsWithSlug() {
   return data?.posts;
 }
 
+export async function getMenuItems() {
+  const data = await fetchAPI(`
+  {
+    menuItems {
+      nodes {
+        label
+        childItems {
+          nodes {
+            label
+            description
+            url
+            target
+          }
+        }
+      }
+    }
+  }
+  `);
+  return data?.menuItems?.nodes?.filter(
+    ({ childItems: { nodes } }: any) => nodes.length > 0
+  );
+}
+
 export async function getAllPostsForHome(preview: boolean) {
   const data = await fetchAPI(
     `
