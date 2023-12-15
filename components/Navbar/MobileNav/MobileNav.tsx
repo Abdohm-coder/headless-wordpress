@@ -5,17 +5,7 @@ import Link from "next/link";
 import React, { FC, useState } from "react";
 import NavItem from "../NavItem";
 import { Logo } from "@/components/ui/icons";
-
-type INavLinks = {
-  title: string;
-  children: {
-    title: string;
-    text: string;
-    image?: string;
-    href?: string;
-    external_link?: string;
-  }[];
-};
+import { INavLinks } from "@/types/generated";
 
 export const MobileNav: FC<{ navLinks: INavLinks[] }> = ({ navLinks }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +62,7 @@ export const MobileNav: FC<{ navLinks: INavLinks[] }> = ({ navLinks }) => {
         <div className="mt-10 container">
           <ul className="flex flex-col divide-y">
             {navLinks.map((item) => (
-              <MobileNavItem key={item.title} {...item} />
+              <MobileNavItem key={item.label} {...item} />
             ))}
           </ul>
         </div>
@@ -81,17 +71,17 @@ export const MobileNav: FC<{ navLinks: INavLinks[] }> = ({ navLinks }) => {
   );
 };
 
-const MobileNavItem: FC<INavLinks> = ({ title, children }) => {
+const MobileNavItem: FC<INavLinks> = ({ label, childItems: { nodes } }) => {
   const [toggle, setToggle] = useState(false);
 
   return (
     <>
-      <li key={title} className="py-3 flex flex-col gap-5">
+      <li key={label} className="py-3 flex flex-col gap-5">
         <button
           onClick={() => setToggle((state) => !state)}
           className="text-xl flex items-center justify-between "
         >
-          {title}
+          {label}
           <ChevronRightIcon
             className={
               toggle
@@ -105,7 +95,7 @@ const MobileNavItem: FC<INavLinks> = ({ title, children }) => {
             toggle ? "block" : "hidden"
           }`}
         >
-          <NavItem data={children} />
+          <NavItem data={nodes} />
         </div>
         {/* {toggle && <NavItem data={children} />} */}
       </li>

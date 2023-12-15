@@ -14,7 +14,6 @@ type Props = {
 };
 
 export default async function page({ params }: Props) {
-  console.log("params: ---", params);
   const data = await getPostAndMorePosts(params?.slug);
   const { post, posts } = data;
   const morePosts = posts?.edges;

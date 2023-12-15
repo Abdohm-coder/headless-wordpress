@@ -8,16 +8,11 @@ import {
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import React, { FC, useState } from "react";
 import NavItem from "../NavItem";
+import { INavLinks } from "@/types/generated";
 
 interface IPopup {
   triggerText: string;
-  content: {
-    title: string;
-    text: string;
-    image?: string;
-    href?: string;
-    external_link?: string;
-  }[];
+  content: INavLinks["childItems"]["nodes"];
 }
 
 export const PopupComponent: FC<IPopup> = ({ triggerText, content }) => {

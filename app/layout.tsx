@@ -18,12 +18,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const navItems = await getMenuItems();
-  console.log(navItems)
+  const navLinks = await getMenuItems();
+  console.log(navLinks);
   return (
     <html lang="en" className="bg-black text-white" suppressHydrationWarning>
       <body className={montserrat.className}>
-        <Navbar />
+        <Navbar navLinks={navLinks} />
         <main>{children}</main>
         <Footer />
       </body>

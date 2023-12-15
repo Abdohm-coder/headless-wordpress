@@ -1,92 +1,12 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import PopupComponent from "./PopupComponent";
 import MobileNav from "./MobileNav";
 import { Logo } from "../ui/icons";
+import { INavLinks } from "@/types/generated";
 
-type INavLinks = {
-  label: string;
-  childItems: {
-    nodes: {
-      label: string;
-      description: string;
-      url: string;
-      target: "_blank" | null;
-    }[];
-  };
-};
-
-const navLinks: INavLinks[] = [
-  {
-    title: "Our Apps",
-    children: [
-      {
-        title: "Procreate for iPad",
-        text: "Sketch. Paint. Create.",
-        image:
-          "https://procreate-assets-cdn.procreate.art/img/procreate.8901aaa.png",
-        href: "/",
-      },
-      {
-        title: "Procreate Dreams",
-        text: "Edit. Animate. Create.",
-        image:
-          "https://procreate-assets-cdn.procreate.art/img/dreams.f2bc29c.png",
-        href: "/",
-      },
-      {
-        title: "Procreate Pocket",
-        text: "Sketch & Paint on iPhone.",
-        image:
-          "https://procreate-assets-cdn.procreate.art/img/pocket.13aba37.png",
-        href: "/",
-      },
-    ],
-  },
-  {
-    title: "Explore",
-    children: [
-      {
-        title: "Stories & Insight",
-        text: "Discover the latest news.",
-        href: "/",
-      },
-      {
-        title: "Education",
-        text: "Learn with Procreate.",
-        external_link: "/",
-      },
-      {
-        title: "Press",
-        text: "Media and editorial resources.",
-        href: "/",
-      },
-    ],
-  },
-  {
-    title: "Support",
-    children: [
-      {
-        title: "Support",
-        text: "Get your questions answered.",
-        external_link: "/",
-      },
-      {
-        title: "Community",
-        text: "Share your art with the world.",
-        external_link: "/",
-      },
-      {
-        title: "Beginners Series",
-        text: "Learn by doing.",
-        href: "/",
-      },
-    ],
-  },
-];
-
-export const Navbar = () => {
+export const Navbar: FC<{ navLinks: INavLinks[] }> = ({ navLinks }) => {
   return (
     <header className="w-full">
       <nav className="container h-32">
@@ -95,12 +15,8 @@ export const Navbar = () => {
             <Logo width={149} height={25} />
           </Link>
           <div className="hidden sm:flex items-center gap-6">
-            {navLinks.map(({ title, children }) => (
-              <PopupComponent
-                key={title}
-                triggerText={title}
-                content={children}
-              />
+            {navLinks.map(({ label, childItems: { nodes } }) => (
+              <PopupComponent key={label} triggerText={label} content={nodes} />
             ))}
           </div>
           <MobileNav navLinks={navLinks} />
