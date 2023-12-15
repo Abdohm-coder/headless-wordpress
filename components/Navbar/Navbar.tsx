@@ -1,11 +1,9 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import logo from "@/assets/logo.svg";
-import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import PopupComponent from "./PopupComponent";
 import MobileNav from "./MobileNav";
+import { Logo } from "../ui/icons";
 
 type INavLinks = {
   label: string;
@@ -94,7 +92,7 @@ export const Navbar = () => {
       <nav className="container h-32">
         <div className="flex items-center justify-between h-full">
           <Link href={"/"}>
-            <Image src={logo} alt="logo" width={149} height={25} />
+            <Logo width={149} height={25} />
           </Link>
           <div className="hidden sm:flex items-center gap-6">
             {navLinks.map(({ title, children }) => (

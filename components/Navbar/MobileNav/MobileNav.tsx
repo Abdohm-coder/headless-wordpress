@@ -1,11 +1,10 @@
 "use client";
 
 import { ChevronRightIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
 import Link from "next/link";
 import React, { FC, useState } from "react";
-import logo from "@/assets/logo.svg";
 import NavItem from "../NavItem";
+import { Logo } from "@/components/ui/icons";
 
 type INavLinks = {
   title: string;
@@ -45,7 +44,7 @@ export const MobileNav: FC<{ navLinks: INavLinks[] }> = ({ navLinks }) => {
         <div className="container h-32">
           <div className="flex items-center justify-between h-full">
             <Link href={"/"}>
-              <Image src={logo} alt="logo" width={149} height={25} />
+              <Logo width={149} height={25} />
             </Link>
             <button
               onClick={handleClose}
@@ -106,7 +105,7 @@ const MobileNavItem: FC<INavLinks> = ({ title, children }) => {
             toggle ? "block" : "hidden"
           }`}
         >
-            <NavItem data={children} />
+          <NavItem data={children} />
         </div>
         {/* {toggle && <NavItem data={children} />} */}
       </li>
